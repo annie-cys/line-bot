@@ -42,6 +42,16 @@ def callback():
 def handle_message(event):
     msg = event.message.text
     r = '妳好漂亮'
+    
+    if '給我貼圖' in msg:
+        sticker_message = StickerSendMessage(
+            package_id='1',
+            sticker_id='1')
+
+        line_bot_api.reply_message(
+        event.reply_token,
+        sticker_message)
+        return
 
     if msg in ['hi', 'Hi'] :
         r = '嗨'
@@ -54,10 +64,7 @@ def handle_message(event):
 
     line_bot_api.reply_message(
         event.reply_token,
-        sticker_message = StickerSendMessage(
-            package_id='1',
-            sticker_id='1'
-))
+        TextSendMessage(text=r))
 
 
 if __name__ == "__main__":
